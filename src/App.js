@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Tasks from './components/todo';
 import DisplayTask from './displaytask';
@@ -8,7 +8,6 @@ class App extends Component {
   state={
     newTask : [
      
- 
     ]
   }
 
@@ -20,6 +19,18 @@ class App extends Component {
     })
 
   }
+
+  deleteTask = (id) => {
+    let tasks = this.state.newTask.filter( task => {
+      return(
+        task.id !== id
+      )
+    });
+
+    this.setState({
+      newTask : tasks
+    })
+  }
    
   render() { 
     return ( 
@@ -27,7 +38,7 @@ class App extends Component {
         <Tasks displayTask = { this.addTask }/>
         <hr />
         <br />
-        <DisplayTask Tasks = { this.state.newTask }/>
+        <DisplayTask Tasks = { this.state.newTask } deleteTask = { this.deleteTask }/>
 
       </>
      );
