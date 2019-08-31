@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component, Fragment} from 'react';
 import './App.css';
+import Tasks from './components/todo';
+import DisplayTask from './displaytask';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state={
+    newTask : [
+     
+ 
+    ]
+  }
+
+  addTask = (task) => {
+    task.id = Math.random();
+    let doTask = [...this.state.newTask, task]
+    this.setState({
+      newTask: doTask
+    })
+
+  }
+   
+  render() { 
+    return ( 
+      <> 
+        <Tasks displayTask = { this.addTask }/>
+        <hr />
+        <br />
+        <DisplayTask Tasks = { this.state.newTask }/>
+
+      </>
+     );
+  }
 }
-
+ 
 export default App;
